@@ -37,7 +37,19 @@ class Spyder {
 
   Future<void> send(String command) async {
     await _ensureInit();
-    final data = [0x73, 0x70, 0x79, 0x64, 0x65, 0x72, 0, 0, 0, 0, ...ascii.encode(command)];
+    final data = [
+      0x73,
+      0x70,
+      0x79,
+      0x64,
+      0x65,
+      0x72,
+      0,
+      0,
+      0,
+      0,
+      ...ascii.encode(command)
+    ];
     await _udp!.send(data, destination);
   }
 
@@ -52,7 +64,8 @@ class Spyder {
 class SpyderResponse {
   final SpyderResponseCode code;
   final List<String> args;
-  const SpyderResponse.fromCodeAndArgs({required this.code, required this.args});
+  const SpyderResponse.fromCodeAndArgs(
+      {required this.code, required this.args});
 
   factory SpyderResponse.fromResponse(String response) {
     final args = response.split(' ');
@@ -95,17 +108,42 @@ enum SpyderResponseCode {
 void main(List<String> arguments) async {
   final s = Spyder.fromAddressString(arguments[0]);
 
-  final finish = Completer<int>();
-  final sub = stdin.transform(utf8.decoder).transform(const LineSplitter()).listen((line) async {
-    if (line.isEmpty) {
-      finish.complete(1);
-      print('Quit');
-      return;
-    }
-    print('C: $line');
-    await s.send(line);
-  });
-  await finish.future;
-  sub.cancel();
+  for (int i = 0; i < 26; i++) {
+    await s.send("RLS $i");
+  }
+
+  //await s.send("LAP 1 0 2 3 4");
+  await s.send("TRN 0 60 2 3 4");
+  await Future.delayed(Duration(seconds: 1));
+
+  for (int i = 0; i < 2; i++) {
+    await s.send("LSP 0 ${i * 3840} 0 3840 ${i + 2}");
+  }
+  await s.send("LSP 0 0 0 100 4");
+
+  await s.send("TRN 1 60 2 3 4");
+  await Future.delayed(Duration(seconds: 1));
+
+  for (int i = 0; i < 3840; i += 5) {
+    await Future.delayed(Duration(milliseconds: 5));
+
+    await s.send("LSP 0 $i 0 ${i + 100} 4");
+  }
+
+  // final finish = Completer<int>();
+  // final sub = stdin
+  //     .transform(utf8.decoder)
+  //     .transform(const LineSplitter())
+  //     .listen((line) async {
+  //   if (line.isEmpty) {
+  //     finish.complete(1);
+  //     print('Quit');
+  //     return;
+  //   }
+  //   print('C: $line');
+  //   await s.send(line);
+  // });
+  // await finish.future;
+  // sub.cancel();
   s.dispose();
 }
