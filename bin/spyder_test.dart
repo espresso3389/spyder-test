@@ -125,7 +125,19 @@ void main(List<String> arguments) async {
   await Future.delayed(Duration(seconds: 1));
 
   for (int i = 0; i < 3840; i += 5) {
+    await Future.delayed(Duration(milliseconds: 2));
+
+    await s.send("LSP 0 $i 0 ${i + 100} 4");
+  }
+
+  for (int i = 0; i < 3840; i += 5) {
     await Future.delayed(Duration(milliseconds: 5));
+
+    await s.send("LSP 0 $i 0 ${i + 100} 4");
+  }
+
+  for (int i = 0; i < 3840; i += 5) {
+    await Future.delayed(Duration(milliseconds: 10));
 
     await s.send("LSP 0 $i 0 ${i + 100} 4");
   }
