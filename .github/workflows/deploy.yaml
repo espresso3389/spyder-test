@@ -56,3 +56,6 @@ jobs:
         with:
           draft: true
           files: bin-*/*
+
+permissions:
+  contents: write
