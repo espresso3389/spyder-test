@@ -1,0 +1,59 @@
+C: BLD test.png 0 2
+S: SpyderResponseCode.success
+BLD test.png 0 3
+C: BLD test.png 0 3
+S: SpyderResponseCode.success
+BLD test.png 0 4
+C: BLD test.png 0 4
+S: SpyderResponseCode.success
+BLD test.png 0 0
+C: BLD test.png 0 0
+S: SpyderResponseCode.success
+BLD test.png 0 1
+C: BLD test.png 0 1
+S: SpyderResponseCode.success
+RPD
+C: RPD
+S: SpyderResponseCode.success: [1,0,PixelSpace 1,test.png,test.png,0,0,27648,2592,0]
+BLD test.png 0 3
+C: BLD test.png 0 3
+S: SpyderResponseCode.success
+RSN
+C: RSN
+S: SpyderResponseCode.success: [PC1,PC2,PC_PIP,Test,TEST2]
+RSN
+C: RSN
+S: SpyderResponseCode.success: [PC1,PC2,PC_PIP,Test,TEST2]
+RPD
+C: RPD
+S: SpyderResponseCode.success: [1,0,PixelSpace 1,test.png,test.png,0,0,27648,2592,0]
+RRL 10
+C: RRL 10
+S: SpyderResponseCode.success: [1,0,4dots.png]
+RRL 0
+C: RRL 0
+S: SpyderResponseCode.success: [0]
+RRL 1
+C: RRL 1
+S: SpyderResponseCode.success: [0]
+RRL 2
+C: RRL 2
+S: SpyderResponseCode.argumentValue
+RRL 3
+C: RRL 3
+S: SpyderResponseCode.argumentValue
+RRL 4
+C: RRL 4
+S: SpyderResponseCode.success: [0]
+RRL 5
+C: RRL 5
+S: SpyderResponseCode.success: [0]
+RRL 6
+C: RRL 6
+S: SpyderResponseCode.success: [5,0,PC1,1,PC2,2,PC_PIP,3,Test,4,TEST2]
+RRL 7
+C: RRL 7
+S: SpyderResponseCode.success: [0]
+RRL 10
+C: RRL 10
+S: SpyderResponseCode.success: [1,0,4dots.png]

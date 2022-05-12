@@ -108,54 +108,52 @@ enum SpyderResponseCode {
 void main(List<String> arguments) async {
   final s = Spyder.fromAddressString(arguments[0]);
 
-  for (int i = 0; i < 26; i++) {
-    await s.send("RLS $i");
-  }
+  await s.send("RLN");
 
-  //await s.send("LAP 1 0 2 3 4");
-  await s.send("TRN 0 60 2 3 4");
-  await Future.delayed(Duration(seconds: 1));
+  // //await s.send("LAP 1 0 2 3 4");
+  // await s.send("TRN 0 60 2 3 4");
+  // await Future.delayed(Duration(seconds: 1));
 
-  for (int i = 0; i < 2; i++) {
-    await s.send("LSP 0 ${i * 3840} 0 3840 ${i + 2}");
-  }
-  await s.send("LSP 0 0 0 100 4");
+  // for (int i = 0; i < 2; i++) {
+  //   await s.send("LSP 0 ${i * 3840} 0 3840 ${i + 2}");
+  // }
+  // await s.send("LSP 0 0 0 100 4");
 
-  await s.send("TRN 1 60 2 3 4");
-  await Future.delayed(Duration(seconds: 1));
+  // await s.send("TRN 1 60 2 3 4");
+  // await Future.delayed(Duration(seconds: 1));
 
-  for (int i = 0; i < 3840; i += 5) {
-    await Future.delayed(Duration(milliseconds: 2));
+  // for (int i = 0; i < 3840; i += 5) {
+  //   await Future.delayed(Duration(milliseconds: 2));
 
-    await s.send("LSP 0 $i 0 ${i + 100} 4");
-  }
+  //   await s.send("LSP 0 $i 0 ${i + 100} 4");
+  // }
 
-  for (int i = 0; i < 3840; i += 5) {
-    await Future.delayed(Duration(milliseconds: 5));
+  // for (int i = 0; i < 3840; i += 5) {
+  //   await Future.delayed(Duration(milliseconds: 5));
 
-    await s.send("LSP 0 $i 0 ${i + 100} 4");
-  }
+  //   await s.send("LSP 0 $i 0 ${i + 100} 4");
+  // }
 
-  for (int i = 0; i < 3840; i += 5) {
-    await Future.delayed(Duration(milliseconds: 10));
+  // for (int i = 0; i < 3840; i += 5) {
+  //   await Future.delayed(Duration(milliseconds: 10));
 
-    await s.send("LSP 0 $i 0 ${i + 100} 4");
-  }
+  //   await s.send("LSP 0 $i 0 ${i + 100} 4");
+  // }
 
-  // final finish = Completer<int>();
-  // final sub = stdin
-  //     .transform(utf8.decoder)
-  //     .transform(const LineSplitter())
-  //     .listen((line) async {
-  //   if (line.isEmpty) {
-  //     finish.complete(1);
-  //     print('Quit');
-  //     return;
-  //   }
-  //   print('C: $line');
-  //   await s.send(line);
-  // });
-  // await finish.future;
-  // sub.cancel();
+  final finish = Completer<int>();
+  final sub = stdin
+      .transform(utf8.decoder)
+      .transform(const LineSplitter())
+      .listen((line) async {
+    if (line.isEmpty) {
+      finish.complete(1);
+      print('Quit');
+      return;
+    }
+    print('C: $line');
+    await s.send(line);
+  });
+  await finish.future;
+  sub.cancel();
   s.dispose();
 }
