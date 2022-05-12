@@ -18,9 +18,9 @@ jobs:
       matrix:
         include:
           - runs-on: ubuntu-latest
-            binary-name: spyder_demo0
+            binary-name: spyder_demo0_linux
           - runs-on: macos-latest
-            binary-name: spyder_demo0
+            binary-name: spyder_demo0_macos
           - runs-on: windows-latest
             binary-name: spyder_demo0.exe
     runs-on: ${{ matrix.runs-on }}
