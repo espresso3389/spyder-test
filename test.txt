@@ -64,3 +64,11 @@ S: SpyderResponseCode.success
 RLK 2
 C: RLK 2
 S: SpyderResponseCode.success: [-0.6161324,0.1632488,1451,1057,3737,901,0,0,0,0,0,0,0,0,15,10,10,10,24,100,0,0,0.1,0.2,0.3,0.4,1,0,1,0,0,100,255,0,]
+
+RAS
+C: RAS
+S: SpyderResponseCode.success: [1,Source 1_16K_01,1]
+
+RLS 2
+C: RLS 2
+S: SpyderResponseCode.success: [Source 1_16K_01,0]
