@@ -14,8 +14,7 @@ C: BLD test.png 0 1
 S: SpyderResponseCode.success
 RPD
 C: RPD
-S: SpyderResponseCode.success: [1,0,PixelSpace 1,test.png,test.png,0,0,27648,2592,0]
-BLD test.png 0 3
+S: SpyderResponseCode.success: [4,0,PixelSpace 1,#00000000,,1936,0,30720,2592,0,1,PixelSpace 2,#FF00FF00,,32672,0,1920,1080,0,2,PixelSpace 3,#FF00FF00,,0,0,1920,1080,0,100,ALL PGM,#00000000,,0,0,17296,2592,0]
 C: BLD test.png 0 3
 S: SpyderResponseCode.success
 RSN
@@ -69,6 +68,32 @@ RAS
 C: RAS
 S: SpyderResponseCode.success: [1,Source 1_16K_01,1]
 
-RLS 2
+RL
 C: RLS 2
 S: SpyderResponseCode.success: [Source 1_16K_01,0]
+
+
+C: RSN
+S: SpyderResponseCode.success: [A1,A2,A3,A4,B1,B2,C1,C2,D1,D2,R1]
+
+Assign source A1 to layer-2
+C: SRA A1 2
+
+Show layer sources
+C: RAS
+S: SpyderResponseCode.success: [2,A4,1,,1]
+
+
+C: DSL
+S: SpyderResponseCode.success: [11,0,A1,3840,2160,0,,1,A2,3840,2160,0,Thumb-D_2.jpg,2,A3,3840,2160,0,,3,A4,3840,2160,0,,4,B1,3840,2160,0,,5,B2,3840,2160,0,,6,C1,3840,2160,0,,7,C2,3840,2160,0,,8,D1,3840,2160,0,,9,D2,3840,2160,0,,10,R1,3840,2160,0,]
+
+
+Move layer-2 to psid=2 and make it visible.
+LAP 2 1 2
+
+Reset Layer-2 position to (0, 0)
+KPS 0 0 0 2
+
+AUX switch
+FKR <CHANNEL> R
+CHANNEL: 0-15
