@@ -1,3 +1,6 @@
+C: RPS
+S: SpyderResponseCode.success: [101,Ready]
+
 C: BLD test.png 0 2
 S: SpyderResponseCode.success
 BLD test.png 0 3

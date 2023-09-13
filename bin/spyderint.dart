@@ -69,8 +69,11 @@ class SpyderResponse {
 
   factory SpyderResponse.fromResponse(String response) {
     final args = response.split(' ');
+    final code = int.parse(args[0]);
     return SpyderResponse.fromCodeAndArgs(
-      code: SpyderResponseCode.values[int.parse(args[0])],
+      code: code > 0 && code <= SpyderResponseCode.checksum.index
+          ? SpyderResponseCode.values[code]
+          : SpyderResponseCode.unknown,
       args: args.skip(1).map((s) => s.replaceAll('%20', ' ')).toList(),
     );
   }
@@ -103,6 +106,8 @@ enum SpyderResponseCode {
 
   /// Reserved.
   checksum,
+
+  unknown,
 }
 
 void main(List<String> arguments) async {
