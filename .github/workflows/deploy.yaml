@@ -40,15 +40,15 @@ jobs:
     name: github release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           name: bin-ubuntu-latest
           path: bin-linux
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           name: bin-macos-latest
           path: bin-macos
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4.1.7
         with:
           name: bin-windows-latest
           path: bin-windows
